@@ -1,0 +1,6 @@
+D:/Git/__context2/cmake-build-debug/CMakeFiles/c_asm.dir
+D:/Git/__context2/cmake-build-debug/CMakeFiles/edit_cache.dir
+D:/Git/__context2/cmake-build-debug/CMakeFiles/pureCPP.dir
+D:/Git/__context2/cmake-build-debug/CMakeFiles/pureC.dir
+D:/Git/__context2/cmake-build-debug/CMakeFiles/gen_header.dir
+D:/Git/__context2/cmake-build-debug/CMakeFiles/rebuild_cache.dir

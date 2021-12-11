@@ -52,20 +52,20 @@ struct Triangle
     struct Position _2;
 };
 
-void* memcpy(void* dst, void* src, size_t size)
+void* my_memcpy(void* dst, void* src, size_t size)
 {
     for (int i = 0; i < size; ++i)
         *((uint8_t*)dst + i) = *((uint8_t*)src + i);
     return dst;
 }
-double abs  (double a)
+double my_abs  (double a)
 {
     uint64_t _ = (*((uint64_t*)&a) & ~((uint64_t)1 << 63));
     return *(double*)&_;
 }
-double sqrt (double a) // Thank you, Gods of StackOverflow
+double my_sqrt (double a) // Thank you, Gods of StackOverflow
 {
-    a = abs(a);
+    a = my_abs(a);
     float x = a;
     float y = 1;
 
@@ -74,7 +74,7 @@ double sqrt (double a) // Thank you, Gods of StackOverflow
     while(x - y > e)
     {
         x = (x + y)/2;
-        y = n/x;
+        y = a/x;
     }
     return x;
 }
@@ -83,7 +83,7 @@ double length(struct Position _0, struct Position _1)
     double
             dx = _0.x - _1.x,
             dy = _0.y - _1.y;
-    return sqrt(dx*dx + dy*dy);
+    return my_sqrt(dx*dx + dy*dy);
 }
 double Square_Circle(struct Circle s)
 {
@@ -100,17 +100,17 @@ double Square_Triangle(struct Triangle s)
             _1 = length(s._1, s._2 ),
             _2 = length(s._0, s._2),
             p = (_0 + _1 + _2) / 2;
-    return sqrt(p*(p-_0)*(p-_1)*(p-_2));
+    return my_sqrt(p*(p-_0)*(p-_1)*(p-_2));
 }
 double Square(struct Shape* s)
 {
     switch (s->type) {
-        'c':
-            return Square_Circle(s);
-        'r':
-            return Square_Rectangle(s);
-        't':
-            return Square_Triangle(s);
+        case 'c':
+            return Square_Circle(*(struct Circle*)s);
+        case 'r':
+            return Square_Rectangle(*(struct Rectangle*)s);
+        case 't':
+            return Square_Triangle(*(struct Triangle*)s);
         default:
             return 0;
     }
@@ -122,28 +122,34 @@ struct Circle* new_Circle(enum Color c, int x0, int y0, int r)
     struct Circle _ = {'c', c, 0, {x0,y0}, r};
     _.square = Square_Circle(_);
     struct Circle* ret = malloc(sizeof(_));
-    memcpy(ret, &_, sizeof(_));
+    my_memcpy(ret, &_, sizeof(_));
     return ret;
 }
-struct Rectangle* new_Rectangle(enum Color, int x0, int y0, int x1, int y1)
+struct Rectangle* new_Rectangle(enum Color c, int x0, int y0, int x1, int y1)
 {
     struct Rectangle _ = {'r', c, 0, {x0,y0}, {x1,y1}};
     _.square = Square_Rectangle(_);
     struct Rectangle* ret = malloc(sizeof(_));
-    memcpy(ret, &_, sizeof(_));
+    my_memcpy(ret, &_, sizeof(_));
     return ret;
 }
-struct Triangle* new_Triangle(enum Color, int x0, int y0, int x1, int y1, int x2, int y2)
+struct Triangle* new_Triangle(enum Color c, int x0, int y0, int x1, int y1, int x2, int y2)
 {
     struct Triangle _ = {'t', c, 0, {x0,y0}, {x1,y1}, {x2,y2}};
     _.square = Square_Triangle(_);
     struct Triangle* ret = malloc(sizeof(_));
-    memcpy(ret, &_, sizeof(_));
+    my_memcpy(ret, &_, sizeof(_));
     return ret;
 }
 
 
-int binarySearch(struct Shape* a[], struct Shape* item, int low, int high)
+int binarySearch
+(
+    struct Shape* a[],
+    struct Shape* item,
+    int low,
+    int high
+)
 {
     if (high <= low)
         if (item->square > a[low]->square)
@@ -196,17 +202,15 @@ void read_shapes(struct Shape*** a, int* n, char* path)
     while (!feof(fin))
     {
         fscanf(fin, " %c ", &c);
-        switch (c) {
-            case 'c', 'r', 't':
-                count++;
-                break;
-            default:
-                fprintf(stderr, "Error: at %ld : \"%c\"\n", ftell(fin), c);
+        if (c == 'c' || c == 'r' || c == 't')
+            count++;
+        else
+            fprintf(stderr, "Error: at %ld : \"%c\"\n", ftell(fin), c);
         }
     }
     rewind(fin);
 
-    a[0] = malloc(count * sizeof(Shape*));
+    *a = malloc(count * sizeof(Shape*));
     struct Shape** arr = a[0];
 
     for (int i = 0; i < count; ++i) {

@@ -1,0 +1,6 @@
+# ninja log v5
+1	799	6608430513199311	build.ninja	ca7f34a434d21bac
+0	3585	6606870045923428	CMakeFiles/c_asm.dir/C_asm.c.obj	2f77099ffd0609ff
+3	3595	6606870046043412	CMakeFiles/pureCPP.dir/pureCPP.cpp.obj	7f31d9c37a5ab331
+1	10167	6608431950892434	CMakeFiles/gen_header.dir/header_gen.c.obj	f765455a2ac3a899
+10169	13204	6608431981342100	gen_header.exe	ecf3a05ce423a106

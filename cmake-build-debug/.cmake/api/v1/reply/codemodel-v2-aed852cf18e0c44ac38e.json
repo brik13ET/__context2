@@ -1,0 +1,87 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"jsonFile" : "directory-.-Debug-d0094a50bb2071803777.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.21"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "__context2",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "c_asm::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-c_asm-Debug-eda0a791ee2c5b6c5d29.json",
+					"name" : "c_asm",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "gen_header::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-gen_header-Debug-1233ec025718a35a00b8.json",
+					"name" : "gen_header",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "pureC::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-pureC-Debug-3b72591b49527d3c4ca2.json",
+					"name" : "pureC",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "pureCPP::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-pureCPP-Debug-3061f381e87fd7482d40.json",
+					"name" : "pureCPP",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "D:/Git/__context2/cmake-build-debug",
+		"source" : "D:/Git/__context2"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 3
+	}
+}
